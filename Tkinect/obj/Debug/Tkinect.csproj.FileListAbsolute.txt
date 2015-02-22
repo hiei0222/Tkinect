@@ -1,0 +1,15 @@
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\bin\Debug\Tkinect.exe.config
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.csprojResolveAssemblyReference.cache
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\MainWindow.baml
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\MainWindow.g.cs
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\App.g.cs
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect_MarkupCompile.cache
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.g.resources
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.Properties.Resources.resources
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.csproj.GenerateResource.Cache
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\bin\Debug\Tkinect.exe
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\bin\Debug\Tkinect.pdb
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\bin\Debug\Microsoft.Kinect.dll
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\bin\Debug\Microsoft.Kinect.xml
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.exe
+c:\users\hiei0222\documents\visual studio 2013\Projects\Tkinect\Tkinect\obj\Debug\Tkinect.pdb
