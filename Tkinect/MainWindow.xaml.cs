@@ -88,6 +88,7 @@ namespace Tkinect
                 return;
 
             _kinect.Open();
+
             InitializeCamera();
             InitializeDepth();
             InitializeInfrared();
@@ -166,10 +167,38 @@ namespace Tkinect
                     case JointType.ElbowRight:
                         DrawJoint(body.Joints[type], 15, Brushes.LawnGreen, 2, Brushes.White);
                         break;
+                    case JointType.KneeLeft:
+                    case JointType.KneeRight:
+                        DrawJoint(body.Joints[type], 15, Brushes.LawnGreen, 2, Brushes.White);
+                        break;
+                    case JointType.HandLeft:
+                        DrawHandJoint(body.Joints[type], body.HandLeftState, 20, 2, Brushes.White);
+                        break;
+                    case JointType.HandRight:
+                        DrawHandJoint(body.Joints[type], body.HandRightState, 20, 2, Brushes.White);
+                        break;
                     default:
                         DrawJoint(body.Joints[type],15,Brushes.RoyalBlue,2,Brushes.White);
                         break;
                 }
+            }
+        }
+
+        private void DrawHandJoint(Joint joint, HandState handState, double radius, double borderWidth, SolidColorBrush border)
+        {
+            switch (handState)
+            {
+                case HandState.Lasso:
+                    DrawJoint(joint,radius,Brushes.Cyan,borderWidth,border);
+                    break;
+                case HandState.Open:
+                    DrawJoint(joint,radius,Brushes.Green,borderWidth,border);
+                    break;
+                case HandState.Closed:
+                    DrawJoint(joint,radius,Brushes.Red,borderWidth,border);
+                    break;
+                default:
+                    break;
             }
         }
 
