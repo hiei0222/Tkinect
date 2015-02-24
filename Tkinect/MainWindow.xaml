@@ -11,8 +11,8 @@
             <RowDefinition Height="100px" />
         </Grid.RowDefinitions>
         <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10" Orientation="Horizontal">
-            <TextBlock Text="Hello world" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="20,0,0,0" Foreground="#FF2A2A2A"/>
-
+            <TextBlock Text="Status:" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="20,0,0,0" Foreground="#FF2A2A2A"/>
+            <TextBlock Text="" x:Name="StatusText" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="20,0,0,0" Foreground="#FF2A2A2A" Visibility="Collapsed"/>
         </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Fill="#FF2A2A2A"/>
         <Grid Grid.Row="2">

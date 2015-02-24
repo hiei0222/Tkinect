@@ -84,9 +84,10 @@ namespace Tkinect
         private void InitializeKinect()
         {
             _kinect = KinectSensor.GetDefault();
-            if (_kinect == null)
-                return;
 
+            if (_kinect == null) return;
+
+                       
             _kinect.Open();
 
             InitializeCamera();
@@ -121,7 +122,17 @@ namespace Tkinect
                 //Get body frame
                 BodyFrame frame = refer.AcquireFrame();
 
-                if (frame == null) return;
+                if (frame == null)
+                {
+                    StatusText.Text = "BodyOff";
+                    StatusText.Visibility = Visibility.Visible;
+                }
+
+                else
+                {
+                    StatusText.Text = "BodyOn";
+                    StatusText.Visibility = Visibility.Visible;
+                }
 
                 //Process it
                 using (frame)
