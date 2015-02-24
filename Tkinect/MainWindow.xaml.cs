@@ -117,7 +117,7 @@ namespace Tkinect
             // Get frame reference
             BodyFrameReference refer = e.FrameReference;
 
-            if (refer == null)
+            if (refer == null) return;
             {
                 //Get body frame
                 BodyFrame frame = refer.AcquireFrame();
