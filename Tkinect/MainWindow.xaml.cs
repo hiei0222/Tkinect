@@ -126,6 +126,7 @@ namespace Tkinect
                 {
                     StatusText.Text = "BodyOff";
                     StatusText.Visibility = Visibility.Visible;
+                    return;
                 }
 
                 else
