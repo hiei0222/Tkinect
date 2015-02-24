@@ -59,6 +59,12 @@ namespace Tkinect
         //Infrared WriteableBitmap linked to our UI
         private WriteableBitmap _infraBitmap = null;
 
+        //All tracked bodies
+        private Body[] _bodies = null;
+
+        //FrameReader for our coloroutput(body)
+        private BodyFrameReader _bodyReader = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -91,6 +97,105 @@ namespace Tkinect
 
         private void InitializeBody()
         {
+            if (_kinect == null) return;
+
+            //Allocate Bodies array;
+            _bodies = new Body[_kinect.BodyFrameSource.BodyCount];
+
+            //Open reader
+            _bodyReader = _kinect.BodyFrameSource.OpenReader();
+
+            //Hook-up event
+            _bodyReader.FrameArrived += OnBodyFrameArrived;
+
+        }
+
+        private void OnBodyFrameArrived(object sender, BodyFrameArrivedEventArgs e)
+        {
+            // Get frame reference
+            BodyFrameReference refer = e.FrameReference;
+
+            if (refer == null)
+            {
+                //Get body frame
+                BodyFrame frame = refer.AcquireFrame();
+
+                if (frame == null) return;
+
+                //Process it
+                using (frame)
+                {
+                    //Aquire body data
+                    frame.GetAndRefreshBodyData(_bodies);
+
+                    //Clear Skeleton Canvas
+                    SkeletonCanvas.Children.Clear();
+
+                    //Loop all bodies
+                    foreach (Body body in _bodies)
+                    {
+                        //Only process tracked bodyie
+                        if (body.IsTracked)
+                        {
+                            DrawBody(body);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DrawBody(Body body)
+        {
+            //Draw Points
+            foreach (JointType type in body.Joints.Keys){
+                //Draw all the body joints
+                switch (type)
+                {
+                    case JointType.Head:
+                    case JointType.FootLeft:
+                    case JointType.FootRight:
+                        DrawJoint(body.Joints[type], 20, Brushes.Yellow, 2, Brushes.White);
+                        break;
+                    case JointType.ShoulderLeft:
+                    case JointType.ShoulderRight:
+                    case JointType.HipLeft:
+                    case JointType.HipRight:
+                        DrawJoint(body.Joints[type],20,Brushes.YellowGreen,2,Brushes.White);
+                        break;
+                    case JointType.ElbowLeft:
+                    case JointType.ElbowRight:
+                        DrawJoint(body.Joints[type], 15, Brushes.LawnGreen, 2, Brushes.White);
+                        break;
+                    default:
+                        DrawJoint(body.Joints[type],15,Brushes.RoyalBlue,2,Brushes.White);
+                        break;
+                }
+            }
+        }
+
+        private void DrawJoint(Joint joint, double radius, SolidColorBrush fill, double borderWidth, SolidColorBrush border)
+        {
+            if (joint.TrackingState != TrackingState.Tracked) return;
+
+            //Map the CameraPoint to ColorSpace so they match
+            ColorSpacePoint colorPoint = _kinect.CoordinateMapper.MapCameraPointToColorSpace(joint.Position);
+
+            //Create the UI element based on the paramenters
+            Ellipse el = new Ellipse();
+            el.Fill = fill;
+            el.Stroke = border;
+            el.StrokeThickness = borderWidth;
+            el.Width = el.Height = radius;
+
+            //Add the Ellipse to the canvas
+            SkeletonCanvas.Children.Add(el);
+
+            //Avoid exceptions based on bad tracking
+            if (float.IsInfinity(colorPoint.X) || float.IsInfinity(colorPoint.Y)) return;
+
+            //Allign ellipse on canvas (Divide by 2 becasue image in only 50% of original size)
+            Canvas.SetLeft(el, colorPoint.X /2);
+            Canvas.SetTop(el, colorPoint.Y / 2);
         }
 
         private void InitializeInfrared()
